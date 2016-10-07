@@ -2,11 +2,13 @@
 // Name
 // list of dishes (what they ate, and how much it cost)
 // A method to add the total of the dishes
-// A method to calculate tax for this diner
-// A method to calculate the tip for this diner
+// A method to calculate tax for this diner //
+// A method to calculate the tip for this diner //
+
+
 // A bill object with:
 // list of diners
-// method to total and print the total of all diners, including tax
+// method to total and print the total of all diners, including tax//
 // method to total and print diners tips
 // method to print a breakdown for each diner including their name, total, tax and tip
 // Dummy data that creates:
@@ -18,38 +20,56 @@
 // Print a breakdown for each person
 
 
-var Diner = function(dinerName,customer1,customer2,customer3) {
-    this.dinerName = dinerName;
-	var customers = [];
-	customers.push(customer1);
-	customers.push(customer2);
-	customers.push(customer3);
+var Bill = function(){
+
+	
 };
 
-var customer = function(name
-
-// var customer = function(customerName){
-	// this.customerName = customerName;
-// }
-
-var tip = function(cost){
-	this.cost = cost;
-	this.cost = this.cost * .15;
+var Diner = function(name, dish1, dish2) {
+		
+		console.log(dish1.cost + dish2.cost);
+				
+		this.total = function(dish1, dish2){
+			return dish1.cost + dish2.cost;
+		};
 	
-	return this.cost;
-}
-
-var tax = function(cost){
-	this.cost = cost;
-	this.cost = this.cost * .095;
+		var tip = function(cost){ //TIP
+			this.cost = cost;
+			this.cost = this.cost * (0.15);
 	
-	return this.cost;
-}
+			return this.cost;
+		};
+		
+		var tax = function(cost){ //TAX
+			this.cost = cost;
+			this.cost = this.cost * (0.095);
+	
+			return this.cost;
+		};
+		
+		var dinerTip = tip(dish1.cost);
+		dinerTip += tip(dish2.cost);
+		
+		var dinerTax = tax(dish1.cost);
+		dinerTax += tax(dish2.cost);
+		
+		var total = this.total;
+		console.log(total);
+		var Customer = { dinerName:name, totalCost: (total() + dinerTip + dinerTax) };		
+		console.log(Customer.totalCost);
+		return Customer;
+	
+};
 
-var total = function(cost,tax,tip){
-	return (cost + tax + tip);
-}
+
 
 $(document).ready(function(){
 
+	var Dish1 = { name:"Fried Noodles", cost: 12.49 };
+	var Dish2 = { name:"Won Ton Soup", cost: 3.49 };
+	var Jeremy = new Diner("Jeremy", Dish1, Dish2);
+	
+	console.log(Jeremy);
+	console.log(Jeremy.Customer.totalCost);
+	
 });
